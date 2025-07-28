@@ -17,7 +17,7 @@ docker build -t daeguS-W .
 docker run -it \
   --name daeguS-W_temp \
   -v /Users/ywlee/daeguS-W:/app/project_data \
+  -v /Users/ywlee/.ssh:/root/.ssh:ro \
   -e DISPLAY=host.docker.internal:0 \
-  daeguS-W:1.0
-
+  daegus-w:1.0
 ```

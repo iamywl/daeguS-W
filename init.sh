@@ -1,25 +1,39 @@
 #!/bin/bash
 
 # 1. 현재 디렉토리에 'doc' 디렉토리 생성
-echo "Creating directory: doc/"
-mkdir -p doc
+echo "doc 디렉토리 생성 시도..."
+if [ ! -d "doc" ]; then
+    mkdir -p doc
+    echo "doc 디렉토리가 생성되었습니다."
+else
+    echo "doc 디렉토리가 이미 존재합니다. 생성을 건너뜀."
+fi
 
 # 2. doc 디렉토리 안으로 이동
-cd doc
+#cd doc
 
 # 3. process1 ~ process10 디렉토리 생성
 for i in {1..10}; do
     process_dir="process${i}"
-    echo "Creating directory: ${process_dir}/"
-    mkdir -p "$process_dir"
+    echo "${process_dir} 디렉토리 생성 시도..."
+    if [ ! -d "$process_dir" ]; then
+        mkdir -p "$process_dir"
+        echo "${process_dir} 디렉토리가 생성되었습니다."
+    else
+        echo "${process_dir} 디렉토리가 이미 존재합니다. 생성을 건너뜀."
+    fi
 
     # 4. 각 process 디렉토리 안에 solN-1 ~ solN-10 디렉토리 생성
-    # 이때 solN-X의 N은 process 디렉토리 번호 (i)를 따름
     for j in {1..10}; do
-        sol_dir="sol${i}-${j}" # 핵심: process 번호 (i)와 sol 순서 (j) 조합
-        echo "  Creating subdirectory: ${process_dir}/${sol_dir}/"
-        mkdir -p "${process_dir}/${sol_dir}"
+        sol_dir="sol${i}-${j}"
+        echo "  ${process_dir}/${sol_dir} 디렉토리 생성 시도..."
+        if [ ! -d "${process_dir}/${sol_dir}" ]; then
+            mkdir -p "${process_dir}/${sol_dir}"
+            echo "  ${process_dir}/${sol_dir} 디렉토리가 생성되었습니다."
+        else
+            echo "  ${process_dir}/${sol_dir} 디렉토리가 이미 존재합니다. 생성을 건너뜀."
+        fi
     done
 done
 
-echo "Directory structure created successfully!"
+echo "DONE"
